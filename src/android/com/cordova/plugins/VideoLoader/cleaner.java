@@ -1,4 +1,4 @@
-package org.apache.cordova.VideoLoader;
+package com.cordova.plugins.VideoLoader;
 
 import android.content.Context;
 
