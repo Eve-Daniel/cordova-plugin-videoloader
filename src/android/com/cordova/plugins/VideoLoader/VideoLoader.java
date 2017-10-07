@@ -29,13 +29,13 @@ public class VideoLoader extends CordovaPlugin {
         if (ACTION_GET.equals(action)) {
             String url = args.getString(0);
             String token = args.getString(1);
-            loader r = loader.F(url, token, callbackContext).setContext(this.xgetContext());
+            loader r = loader.F(url, token, callbackContext);//.setContext(this.xgetContext());
             new Thread(r).start();
             return true;
         }
 
         if(ACTION_CLEAR.equals(action)){
-            cleaner c = cleaner.F(callbackContext).setContext(this.xgetContext());
+            cleaner c = cleaner.F(callbackContext);//.setContext(this.xgetContext());
             new Thread(c).start();
             return true;
         }
