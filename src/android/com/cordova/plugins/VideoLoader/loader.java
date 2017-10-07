@@ -130,7 +130,8 @@ public class loader implements Runnable {
                     fout.close();
             }
         } catch (Exception $e) {
-            this.onFail($e);
+            this.context.error("inCatch:"+$e.getMessage()+":hprev="+$e.toString());
+            this.onFail($e);            
             return;
         }
         this.onSuccess($file.toURI().toString());
