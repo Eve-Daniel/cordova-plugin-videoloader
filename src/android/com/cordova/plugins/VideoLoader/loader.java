@@ -92,7 +92,7 @@ public class loader implements Runnable {
         //this.onSuccess("ccc");
         File $file = new File($dir, this.getFileName());
         if ($file.exists()) {
-            this.onSuccess($file.toURI().toString());
+            this.onSuccess($file.getAbsolutePath());
             return;
         }
         //<editor-fold defaultstate="collapsed" desc="connection">
@@ -147,7 +147,7 @@ public class loader implements Runnable {
             this.onFail($e);
             return;
         }
-        this.onSuccess($file.toURI().toString());
+        this.onSuccess($file.getAbsolutePath());
 
 
     }
