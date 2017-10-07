@@ -13,7 +13,7 @@
         <engine name="cordova" version=">=3.0.0" />
     </engines> 
  
-    <js-module src="www/videoloader.js" name="videoLoader">
+    <js-module src="www/videoLoader.js" name="videoLoader">
         <clobbers target="videoLoader" />
     </js-module>
     
