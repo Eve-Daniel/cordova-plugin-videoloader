@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="com.cordova.plugins.videoloader"
+      version="1.0.0">
+    <name>VideoLoader</name>
+    <description></description>
+    <license>MIT</license>
+
+    <keywords></keywords>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines> 
+ 
+    <js-module src="www/videoloader.js" name="videoLoader">
+        <clobbers target="videoLoader" />
+    </js-module>
+    
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="videoLoader">
+                <param name="ios-package" value="CDVVideoLoader"/>
+            </feature>
+        </config-file>
+        <header-file src="src/ios/CDVVideoLoader.h" />
+        <source-file src="src/ios/CDVVideoLoader.m" />                      
+    </platform>
+    
+    <!-- android -->
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        </config-file>
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="videoLoader">
+                <param name="android-package" value="com.cordova.plugins.VideoLoader.VideoLoader"/>
+            </feature>
+        </config-file>
+ 
+        <source-file src="src/android/com/cordova/plugins/VideoLoader/VideoLoader.java" target-dir="src/com/cordova/plugins/VideoLoader" />      
+        <source-file src="src/android/com/cordova/plugins/VideoLoader/cleaner.java" target-dir="src/com/cordova/plugins/VideoLoader" />     
+        <source-file src="src/android/com/cordova/plugins/VideoLoader/loader.java" target-dir="src/com/cordova/plugins/VideoLoader" />     
+    </platform>          
+</plugin>
