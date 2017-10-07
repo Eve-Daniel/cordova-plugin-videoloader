@@ -1,5 +1,6 @@
-package com.cordova.plugins.VideoLoader;
+package org.apache.cordova.VideoLoader;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import org.apache.cordova.CallbackContext;
@@ -23,11 +24,12 @@ import javax.net.ssl.X509TrustManager;
 
 public class loader implements Runnable {
 
-    public static String $DIR = "/mordoboy_videos";
+    public static String $DIR = "mordoboy_videos";
 
     private String url;
     private CallbackContext context;
     private String $token;
+    private Context appcontext;
 
     private loader(String aurl, String token, CallbackContext acontext) {
         this.url = aurl;
@@ -71,6 +73,12 @@ public class loader implements Runnable {
         this.context.error($msg);
     }
 
+    public loader setContext(Context context){
+        this.appcontext = context;
+
+        return this;
+    }
+
     @Override
     public void run() {
         File $dir = new File($DIR);
@@ -79,7 +87,7 @@ public class loader implements Runnable {
         }
         File $file = new File($dir, this.getFileName());
         if ($file.exists()) {
-            this.onSuccess("file://"+$file.toURI().toString());
+            this.onSuccess($file.toURI().toString());
             return;
         }
         //<editor-fold defaultstate="collapsed" desc="connection">
@@ -112,7 +120,7 @@ public class loader implements Runnable {
 
         try {
             // And as before now you can use URL and URLConnection
-            URL url = new URL(this.url + "?uiToken=" + this.$token);
+            URL url = new URL(this.url + "?token=" + this.$token);
             URLConnection connection = url.openConnection();
             connection.setUseCaches(false);
             try {
@@ -131,10 +139,10 @@ public class loader implements Runnable {
             }
         } catch (Exception $e) {
             this.context.error("inCatch:"+$e.getMessage()+":hprev="+$e.toString());
-            this.onFail($e);            
+            this.onFail($e);
             return;
         }
-        this.onSuccess("file://"+$file.toURI().toString());
+        this.onSuccess($file.toURI().toString());
 
 
     }

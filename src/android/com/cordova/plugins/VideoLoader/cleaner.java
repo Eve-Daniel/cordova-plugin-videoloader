@@ -1,4 +1,6 @@
-package com.cordova.plugins.VideoLoader;
+package org.apache.cordova.VideoLoader;
+
+import android.content.Context;
 
 import org.apache.cordova.CallbackContext;
 
@@ -13,6 +15,7 @@ public class cleaner implements Runnable {
     public static String $DIR = "mordoboy_videos";
 
     private CallbackContext $context;
+    private Context appcontext;
 
     protected cleaner(CallbackContext context) {
         this.$context = context;
@@ -21,6 +24,11 @@ public class cleaner implements Runnable {
 
     public static cleaner F(CallbackContext context) {
         return new cleaner(context);
+    }
+
+    public cleaner setContext(Context co){
+        this.appcontext =co;
+        return this;
     }
 
 
