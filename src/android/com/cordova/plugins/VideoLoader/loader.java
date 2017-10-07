@@ -81,15 +81,15 @@ public class loader implements Runnable {
 
     @Override
     public void run() {
-        this.onSuccess("aaaa");
+        //this.onSuccess("aaaa");
         //this.onSuccess(this.appcontext.getDir($DIR,Context.MODE_PRIVATE).getAbsolutePath());
-        //this.onFail(this.appcontext.getDir($DIR,Context.MODE_PRIVATE).getAbsolutePath());
-        this.onSuccess("bbbb");
+        ////this.onFail(this.appcontext.getDir($DIR,Context.MODE_PRIVATE).getAbsolutePath());
+        //this.onSuccess("bbbb");
         File $dir = this.appcontext.getDir($DIR,Context.MODE_PRIVATE);//new File($DIR);
         if (!$dir.exists()) {
             $dir.mkdirs();
         }
-        this.onSuccess("ccc");
+        //this.onSuccess("ccc");
         File $file = new File($dir, this.getFileName());
         if ($file.exists()) {
             this.onSuccess($file.toURI().toString());
