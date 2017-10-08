@@ -45,5 +45,6 @@
         <source-file src="src/android/com/cordova/plugins/VideoLoader/VideoLoader.java" target-dir="src/com/cordova/plugins/VideoLoader" />      
         <source-file src="src/android/com/cordova/plugins/VideoLoader/cleaner.java" target-dir="src/com/cordova/plugins/VideoLoader" />     
         <source-file src="src/android/com/cordova/plugins/VideoLoader/loader.java" target-dir="src/com/cordova/plugins/VideoLoader" />     
+        <source-file src="src/android/com/cordova/plugins/VideoLoader/GlobalCleaner.java" target-dir="src/com/cordova/plugins/VideoLoader" />   
     </platform>          
 </plugin>
