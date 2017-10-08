@@ -18,18 +18,20 @@ public class VideoLoader extends CordovaPlugin {
 
 
     private Context xgetContext(){
+
         return this.cordova.getActivity().getApplicationContext();
     }
-    
-    
+
+
 
     @Override
     public boolean execute(String action, CordovaArgs args, CallbackContext callbackContext) throws JSONException {
-
+        GlobalCleaner.F(this.xgetContext());
         if (ACTION_GET.equals(action)) {
             String url = args.getString(0);
             String token = args.getString(1);
-            loader r = loader.F(url, token, callbackContext).setContext(this.xgetContext());
+            long lap = args.getLong(2);
+            loader r = loader.F(url, token, lap, callbackContext).setContext(this.xgetContext());
             new Thread(r).start();
             return true;
         }

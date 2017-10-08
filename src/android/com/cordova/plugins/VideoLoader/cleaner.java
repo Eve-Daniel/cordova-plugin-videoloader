@@ -12,7 +12,6 @@ import java.io.IOException;
  */
 
 public class cleaner implements Runnable {
-    public static String $DIR = "mordoboy_videos";
 
     private CallbackContext $context;
     private Context appcontext;
@@ -34,17 +33,7 @@ public class cleaner implements Runnable {
 
     @Override
     public void run() {
-        File $dir = new File($DIR);
-        if ($dir.exists()) {
-            String deleteCmd = "rm -r " + $DIR; //Создаем текстовую командную строку
-            Runtime runtime = Runtime.getRuntime();
-            try {
-                runtime.exec(deleteCmd); //Выполняем системные команды
-            } catch (IOException e) {
-                this.$context.error(e.getMessage());
-                return;
-            }
-        }
+        GlobalCleaner.F(this.appcontext);
         this.$context.success("ready");
     }
 }

@@ -1,10 +1,10 @@
 var videoLoader = {
 
-    loadVideo: function(url, token, successCallback, errorCallback) {
+    loadVideo: function(url, token,lap, successCallback, errorCallback) {
         cordova.exec(successCallback,
                     errorCallback,
                     'VideoLoader', 'loadVideo',
-                    [url, token]
+                    [url, token,lap]
         );
     },
     clear: function(successCallback, errorCallback) {

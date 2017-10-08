@@ -24,22 +24,24 @@ import javax.net.ssl.X509TrustManager;
 
 public class loader implements Runnable {
 
-    public static String $DIR = "mordoboy_videos";
-
     private String url;
     private CallbackContext context;
     private String $token;
     private Context appcontext;
+    private long lap;
+    private long contextTimestamp; //отметка - когда произошло изменение видеохоста
+    // как удалять ненужные, смаестить в сторону кеша?
 
-    private loader(String aurl, String token, CallbackContext acontext) {
+    private loader(String aurl, String token,long lap, CallbackContext acontext) {
         this.url = aurl;
         this.context = acontext;
         this.$token = token;
+        this.lap = lap;
     }
 
 
-    public static loader F(String url, String token, CallbackContext context) {
-        return new loader(url, token, context);
+    public static loader F(String url, String token, long lap,CallbackContext context) {
+        return new loader(url, token, lap, context);
     }
 
     private String MD5(String $in) {
@@ -81,22 +83,18 @@ public class loader implements Runnable {
 
     @Override
     public void run() {
-        //this.onSuccess("aaaa");
-        //this.onSuccess(this.appcontext.getDir($DIR,Context.MODE_PRIVATE).getAbsolutePath());
-        ////this.onFail(this.appcontext.getDir($DIR,Context.MODE_PRIVATE).getAbsolutePath());
-        //this.onSuccess("bbbb");
-       // File $dir = this.appcontext.getDataDir(); //new File($DIR);
-        //$dir= new File($dir,$DIR);
-         File $dir = this.appcontext.getDir($DIR,Context.MODE_PRIVATE); //new File($DIR);
+
+        File $dir = this.appcontext.getCacheDir(); //new File($DIR);
        // $dir= new File($dir,$DIR);
         if (!$dir.exists()) {
             $dir.mkdirs();
         }
-    
-        //this.onSuccess("ccc");
         File $file = new File($dir, this.getFileName());
-        if ($file.exists()) {
-            this.onSuccess($file.getAbsolutePath());
+        if($file.exists() && $file.isFile() && $file.lastModified()<this.lap*1000){
+            $file.delete(); // удалить файл если он устарел
+        }
+        if ($file.exists() && $file.isFile() && $file.canWrite()){
+            this.onSuccess("file://"+$file.getAbsolutePath());
             return;
         }
         //<editor-fold defaultstate="collapsed" desc="connection">
@@ -129,7 +127,7 @@ public class loader implements Runnable {
 
         try {
             // And as before now you can use URL and URLConnection
-            URL url = new URL(this.url + "?uiToken=" + this.$token);
+            URL url = new URL(this.url + "?token=" + this.$token);
             URLConnection connection = url.openConnection();
             connection.setUseCaches(false);
             try {
@@ -151,7 +149,7 @@ public class loader implements Runnable {
             this.onFail($e);
             return;
         }
-        this.onSuccess($file.getAbsolutePath());
+        this.onSuccess("file://"+$file.getAbsolutePath());
 
 
     }
