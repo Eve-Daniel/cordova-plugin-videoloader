@@ -37,10 +37,11 @@ public class GlobalCleaner {
         if(!runned){
             if(lastRun+(60*60*3*1000)<System.currentTimeMillis()){
                 runned=true;
+                final Context x = context;
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        File cacheDir = context.getCacheDir();
+                        File cacheDir = x.getCacheDir();
                         File[] list = cacheDir.listFiles(new FileFilter() {
                             @Override
                             public boolean accept(File pathname) {
