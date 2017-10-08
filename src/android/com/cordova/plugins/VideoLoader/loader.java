@@ -85,7 +85,8 @@ public class loader implements Runnable {
         //this.onSuccess(this.appcontext.getDir($DIR,Context.MODE_PRIVATE).getAbsolutePath());
         ////this.onFail(this.appcontext.getDir($DIR,Context.MODE_PRIVATE).getAbsolutePath());
         //this.onSuccess("bbbb");
-        File $dir = this.appcontext.getDir($DIR,Context.MODE_WORLD_READABLE);//new File($DIR);
+        File $dir = this.appcontext.getCacheDir(); //new File($DIR);
+        $dir= new File($dir,$DIR);
         if (!$dir.exists()) {
             $dir.mkdirs();
         }
