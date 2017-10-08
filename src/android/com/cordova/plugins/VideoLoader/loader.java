@@ -87,12 +87,12 @@ public class loader implements Runnable {
         //this.onSuccess("bbbb");
        // File $dir = this.appcontext.getDataDir(); //new File($DIR);
         //$dir= new File($dir,$DIR);
-        File $dir = this.appcontext.getFilesDir(); //new File($DIR);
-        $dir= new File($dir,$DIR);
-        
+         File $dir = this.appcontext.getDir($DIR,Context.MODE_PRIVATE); //new File($DIR);
+       // $dir= new File($dir,$DIR);
         if (!$dir.exists()) {
             $dir.mkdirs();
         }
+    
         //this.onSuccess("ccc");
         File $file = new File($dir, this.getFileName());
         if ($file.exists()) {
