@@ -127,7 +127,7 @@ public class loader implements Runnable {
 
         try {
             // And as before now you can use URL and URLConnection
-            URL url = new URL(this.url + "?token=" + this.$token);
+            URL url = new URL(this.url + "?uiToken=" + this.$token);
             URLConnection connection = url.openConnection();
             connection.setUseCaches(false);
             try {
